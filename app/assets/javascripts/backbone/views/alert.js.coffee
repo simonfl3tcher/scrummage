@@ -8,5 +8,5 @@ class App.Views.Alert extends Backbone.View
 		@options = options
 
 	render: ->
-		@$el.html(@template(@options))
+		@$el.html('<h1>Error</h1>')
 		@

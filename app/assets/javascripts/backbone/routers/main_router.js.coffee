@@ -17,16 +17,13 @@ class App.Routers.MainRouter extends Backbone.Router
 
 	login: ->
 		@layoutViews()
-		if not App.currentUser.get('logged_in')
-			@headerView.remove()
-			@contentView.remove()
-			@loginView = new App.Views.Login({ model: new App.Models.Login() })
-			$('body').append(@loginView.render().el)
-		else 
-			App.Vent.trigger 'already_logged_in'
+		@headerView.remove()
+		@contentView.remove()
+		@loginView = new App.Views.Login({ model: new App.Models.Login() })
+		$('body').append(@loginView.render().el)
 
 	logout: ->
-		App.Vent.trigger 'user:logged_out'
+		console.log "Logout"
 
 	notFound: ->
 		@layoutViews()
@@ -36,5 +33,6 @@ class App.Routers.MainRouter extends Backbone.Router
 		@layoutViews()
 
 	layoutViews: ->
+		$('#login-page').remove()
 		$("#header").html(@headerView.render().el)
 		$("#content").html(@contentView.render().el)

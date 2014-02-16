@@ -1,5 +1,4 @@
 #= require_self
-#= require_tree ./lib
 #= require_tree ./prototypes
 #= require_tree ./templates
 #= require_tree ./models
@@ -15,6 +14,10 @@ window.App =
   Mixins: {}
   
   initialize: (data) ->
-    App.currentUser = new App.Models.CurrentUser(data.current_user)
     new App.Routers.MainRouter;
-    Backbone.history.start();
+    if not Backbone.History.started
+      Backbone.history.start();
+
+$(document).on 'page:load', ->
+  Backbone.history.stop()
+  App.initialize() 
