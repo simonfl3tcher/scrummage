@@ -1,0 +1,17 @@
+<h1>{{ name }}</h1>
+<p class="description">{{ description}}</p>
+
+{{#if owned}}
+<div class="pull-right"><button class="btn btn-primary">Edit</button></div>
+<div class="pull-right"><button class="btn btn-danger">Delete</button></div>
+{{/if}}
+
+<div class="clearfix"></div>
+
+<hr>
+
+<div id="issues"></div>
+
+<hr>
+
+<div id="new_issue"></div>

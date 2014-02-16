@@ -1,0 +1,3 @@
+== Bug Tracker
+
+Simple web app to track bugs that an application has. This enables me to track them in a place for the next sprint.

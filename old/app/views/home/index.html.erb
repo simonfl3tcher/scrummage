@@ -1,0 +1,12 @@
+<%= javascript_tag do %>
+	<% if current_user %>
+		var current_user = {
+			id: <%= current_user.id%>,
+			loggedIn: true, 
+			username: '<%= current_user.username %>'
+		};
+	<% else %>
+		var current_user = { logged_in: false }
+	<% end %>
+		App.initialize({ current_user: current_user });
+<% end %>
