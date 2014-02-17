@@ -13,7 +13,7 @@ class App.Views.Login extends Backbone.View
 		@$('.alert').html("Credentials are not valid").show()
 
 	triggerLoggedIn: ->
-		App.Vent.trigger 'user:logged_in', @model.get('id'), @model.get('email_address')
+		App.Vent.trigger 'user:logged_in'
 
 	render: ->
 		@$el.html(@template())
@@ -21,6 +21,6 @@ class App.Views.Login extends Backbone.View
 
 	submit: (e) ->
 		e.preventDefault()
-		@model.set email_address: @$("#email_address").val()
-		@model.set password: @$("#password").val()
+		@model.set email_address: $("#email_address").val()
+		@model.set password: $("#password").val()
 		@model.save()

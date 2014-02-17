@@ -1,0 +1,10 @@
+.background {
+  /*background: url(/assets/background06.jpg);
+  background-position: center center;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  z-index: 0;*/ }
+
+.vertical-offset-100 {
+  padding-top: 100px; }

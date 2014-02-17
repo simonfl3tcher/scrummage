@@ -16,14 +16,16 @@ class App.Routers.MainRouter extends Backbone.Router
 		@layoutViews()
 
 	login: ->
-		@layoutViews()
-		@headerView.remove()
-		@contentView.remove()
-		@loginView = new App.Views.Login({ model: new App.Models.Login() })
-		$('body').append(@loginView.render().el)
+		if App.currentUser.get('loggedIn')
+			App.Vent.trigger "already_logged_in"
+			Backbone.history.navigate('', true)
+		else
+			@layoutViews()
+			@contentView.swapMain( new App.Views.Login({ model: new App.Models.Login() }))
 
 	logout: ->
-		console.log "Logout"
+		App.Vent.trigger "user:logged_out"
+		Backbone.history.navigate('login', true)
 
 	notFound: ->
 		@layoutViews()
