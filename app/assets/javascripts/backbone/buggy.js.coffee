@@ -17,6 +17,7 @@ window.App =
   
   initialize: (data) ->
   	App.currentUser = new App.Models.CurrentUser(data.current_user)
+  	App.csrfToken = $("meta[name='csrf-token']").attr('content');
   	new App.Routers.MainRouter;
   	if not Backbone.History.started
 	    Backbone.history.start();

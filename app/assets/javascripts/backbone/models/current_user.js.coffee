@@ -10,10 +10,10 @@ class App.Models.CurrentUser extends Backbone.Model
 	logout: ->
 		m = new App.Models.Login({ id: @id })
 		m.destroy
-			success: (model, data) =>
+			success: (model, response) =>
 				@set loggedIn: false
 				delete @id
 				delete @attributes.email
 				delete @attributes.id
-				if data
-					window.csrf(data.csrfToken)
+				if response
+					App.csrfToken = response.csrfToken;

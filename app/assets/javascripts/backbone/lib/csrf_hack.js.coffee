@@ -1,9 +1,9 @@
-window.csrf = (token) ->
-	console.log token
-	$.ajaxSetup
-		beforeSend: (xhr, settings) ->
-			return if (settings.type is "GET")
-			xhr.setRequestHeader('X-CSRF-Token', token) if token
+Backbone.sync = ((original) ->
+  (method, model, options) ->
+    options.beforeSend = (xhr) ->
+      xhr.setRequestHeader "X-CSRF-Token", App.csrfToken
+      return
 
-$ ->
-	window.csrf($('meta[name="csrf-token"]').attr('content'))
+    original method, model, options
+    return
+)(Backbone.sync)
