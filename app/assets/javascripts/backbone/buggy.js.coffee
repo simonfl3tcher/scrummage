@@ -24,4 +24,4 @@ window.App =
 
 $(document).on 'page:load', ->
   Backbone.history.stop()
-  App.initialize(App.currentUser) 
+  App.initialize()

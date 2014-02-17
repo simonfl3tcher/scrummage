@@ -7,6 +7,7 @@ class App.Views.Header extends Backbone.View
 		@listenTo App.Vent, 'user:logged_in', @render
 
 	render: ->
+		console.log App.currentUser.get('loggedIn')
 		@$el.html(@template({ current_user: App.currentUser.get('loggedIn') }))
 		@
 

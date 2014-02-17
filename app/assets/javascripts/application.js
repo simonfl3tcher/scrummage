@@ -12,7 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
 //= require json2
 //= require handlebars.runtime
 //= require underscore
