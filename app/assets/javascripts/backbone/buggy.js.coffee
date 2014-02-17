@@ -1,6 +1,5 @@
 #= require_self
 #= require_tree ./lib
-#= require_tree ./mixins
 #= require_tree ./prototypes
 #= require_tree ./models
 #= require_tree ./templates
@@ -24,4 +23,4 @@ window.App =
 
 $(document).on 'page:load', ->
   Backbone.history.stop()
-  App.initialize()
+  App.initialize({ current_user: App.currentUser })

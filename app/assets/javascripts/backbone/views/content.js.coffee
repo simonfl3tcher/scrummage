@@ -6,6 +6,7 @@ class App.Views.Content extends Backbone.View
 	initialize: ->
 		@listenTo App.Vent, "user:logged_in", @loggedIn
 		@listenTo App.Vent, "user:logged_out", @logout
+		@listenTo App.Vent, "project:show", @projectShow
 		@listenTo App.Vent, "page_not_found", @pageNotFound
 		@listenTo App.Vent, "already_logged_in", @alreadyLoggedIn
 
@@ -47,3 +48,6 @@ class App.Views.Content extends Backbone.View
 	alert: (msg, type) ->
 		v = new App.Views.Alert({ message: msg, type: type })
 		$('#alert').html(v.render().el)
+
+	projectShow: (model) ->
+		@swapMain(new App.Views.ProjectDetails({ model: model }))

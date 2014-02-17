@@ -30,4 +30,4 @@ class App.Views.Projects extends Backbone.View
 	renderProject: (model) -> 
 		v = new App.Views.Project({ model: model })
 		@childViews.push(v)
-		@$('ul').append(v.render().el)
+		@$('ul').append(v.render().el.html())

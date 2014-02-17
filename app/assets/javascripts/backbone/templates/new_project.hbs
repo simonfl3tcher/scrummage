@@ -1,0 +1,21 @@
+<form id="new_project" action="/projects" method="post">
+	<fieldset>
+		<legend>Project Overview</legend>
+
+		<div class="control-group">
+			<label for="name" class="control-label">Project Name</label>
+			<div class="controls">
+				<input type="text" name="name" id="name" placeholder="Project Name" value="{{name}}" />
+			</div>
+		</div>
+		<div class="control-group">
+			<label for="description" class="control-label">Description</label>
+			<div class="controls">
+				<textarea id="description" name="description" rows="5" cols="30">{{description}}</textarea>
+			</div>
+		</div>
+		<br>
+		<button type="submit" class="btn btn-warning">Submit</button>
+	</fieldset>
+
+</form>

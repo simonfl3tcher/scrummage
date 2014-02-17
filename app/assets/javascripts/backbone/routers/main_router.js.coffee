@@ -5,6 +5,8 @@ class App.Routers.MainRouter extends Backbone.Router
 		"login": "login"
 		"logout": "logout"
 		"projects": "project"
+		"projects/:id": "showProject"
+		"projects/new": "newProject"
 		"*path"  : "notFound"
 
 
@@ -16,12 +18,7 @@ class App.Routers.MainRouter extends Backbone.Router
 		@layoutViews()
 
 	login: ->
-		if App.currentUser.get('loggedIn')
-			App.Vent.trigger "already_logged_in"
-			Backbone.history.navigate('', true)
-		else
-			@layoutViews()
-			@contentView.swapMain( new App.Views.Login({ model: new App.Models.Login() }))
+		@loginViews()
 
 	logout: ->
 		App.Vent.trigger "user:logged_out"
@@ -33,8 +30,27 @@ class App.Routers.MainRouter extends Backbone.Router
 
 	project: ->
 		@layoutViews()
+		@contentView.swapMain(new App.Views.Empty())
+		@contentView.swapSide(new App.Views.Projects({ collection: new App.Collections.Projects }))
+
+	newProject: ->
+		console.log '12312312'
 
 	layoutViews: ->
-		$('#login-page').remove()
 		$("#header").html(@headerView.render().el)
 		$("#content").html(@contentView.render().el)
+
+	loginViews: ->
+		@headerView.leave()
+		@contentView .leave()
+		v = new App.Views.Login({ model: new App.Models.Login() })
+		$('#login').html(v.render().el)
+
+	showProject: (id) ->
+
+		@layoutViews()
+		@contentView.swapSide(new App.Views.Projects({ collection: new App.Collections.Projects }))
+		m = new App.Models.Project({ id: parseInt(id) })
+		m.fetch
+			success: (data) ->
+				App.Vent.trigger "project:show", new App.Models.Project(data.attributes)
