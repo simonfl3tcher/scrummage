@@ -1,7 +1,7 @@
 class App.Views.Empty extends Backbone.View 
 
-	className: "well well-large"
+	template: HandlebarsTemplates['backbone/templates/empty']
 
 	render: ->
-		@$el.html('<h4>Please choose from the left hand panel</h4>')
+		@$el.html(@template())
 		@

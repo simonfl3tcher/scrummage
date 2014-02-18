@@ -5,18 +5,24 @@ class App.Views.Projects extends Backbone.View
 	events: 
 		'click a.btn': 'newProject'
 
-	newProject: ->
-		console.log "123123123"
+	newProject: (e) ->
+		e.preventDefault()
+		App.Vent.trigger "project:new"
 
 	initialize: ->
 		@childViews = []
 		@listenTo @collection, "reset", @render
+		@listenTo App.Vent, "project:create", @renderProject
+		@listenTo @collection, "add", @addToCollection
 		@collection.fetch({ reset: true })
 
 	render: ->
 		@$el.html(@template({ authenticated: App.currentUser.get('loggedIn') }))
 		@collection.forEach @renderProject, @
 		@
+
+	addToCollection: (model) ->
+		@collection.add model
 
 	renderProject: (model) ->
 		view = new App.Views.Project({ model: model })

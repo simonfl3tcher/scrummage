@@ -6,6 +6,14 @@ class App.Views.ProjectDetails extends Backbone.View
 		@childViews = []
 		@model.fetch() unless not @model.isNew()
 
+	events:
+		'click .btn.btn-danger': 'destroyProject'
+
 	render: ->
 		@$el.html(@template(@model.toJSON()))
 		@
+
+	destroyProject: ->
+		return unless confirm("Are you sure?")
+		@model.destroy { wait: true }
+		App.Vent.trigger "project:destroy", 'You have successfully deleted the project'

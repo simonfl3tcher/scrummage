@@ -5,8 +5,8 @@ class App.Routers.MainRouter extends Backbone.Router
 		"login": "login"
 		"logout": "logout"
 		"projects": "project"
-		"projects/:id": "showProject"
 		"projects/new": "newProject"
+		"projects/:id": "showProject"
 		"*path"  : "notFound"
 
 
@@ -34,7 +34,9 @@ class App.Routers.MainRouter extends Backbone.Router
 		@contentView.swapSide(new App.Views.Projects({ collection: new App.Collections.Projects }))
 
 	newProject: ->
-		console.log '12312312'
+		@layoutViews()
+		@contentView.swapSide(new App.Views.Projects({ collection: new App.Collections.Projects }))
+		@contentView.swapMain(new App.Views.NewProject({ model: new App.Models.Project }))
 
 	layoutViews: ->
 		$("#header").html(@headerView.render().el)
