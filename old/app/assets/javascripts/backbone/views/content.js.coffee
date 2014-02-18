@@ -22,7 +22,7 @@ class App.Views.Content extends Backbone.View
 
 	editProject: (model) ->
 		@swapMain(new App.Views.NewProject({ model: model }))
-		Backbone.history.navigate('/project/edit/' + model.id)
+		Backbone.history.navigate('/projects/edit/' + model.id)
 
 	swapMainToEmpty: (model, alert = '')->
 		Backbone.history.navigate("/projects", true)

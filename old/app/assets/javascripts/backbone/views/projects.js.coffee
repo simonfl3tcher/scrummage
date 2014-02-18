@@ -12,8 +12,8 @@ class App.Views.Projects extends Backbone.View
 	initialize: ->
 		@childViews = []
 		@listenTo @collection, "reset", @render
-		@listenTo App.Vent, "project:create", @addToCollection
-		@listenTo @collection, "add", @renderProject
+		@listenTo App.Vent, "project:create", @renderProject
+		@listenTo @collection, "add", @addToCollection
 		@collection.fetch({ reset: true })
 
 		@listenTo App.Vent, 'remove', @leave

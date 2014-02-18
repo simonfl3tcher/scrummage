@@ -1,1 +1,5 @@
-<a class="list-group-item" href="#">{{name}}</a>
+{{#if current_view}}
+	<a class="list-group-item active">{{name}}</a>
+{{else}}
+	<a class="list-group-item">{{name}}</a>
+{{/if}}

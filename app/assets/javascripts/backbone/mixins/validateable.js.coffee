@@ -5,8 +5,8 @@ App.Mixins.Validateable =
 
 	renderError: (errors, attribute) ->
 		err = errors.join "; "
-		@$("#" + attribute).closest("div.control-group").addClass('error')
-		@$("#" + attribute).closest("div.controls").append('<span class="help">' + err + '</span>')
+		@$("#" + attribute).closest("div.form-group").addClass('has-error')
+		@$("#" + attribute).closest("div.controls").append('<span class="help-block">' + err + '</span>')
 
 	parseErrorResponse: (model, response) ->
 		if response and response.status is 403
@@ -16,5 +16,5 @@ App.Mixins.Validateable =
 			@renderErrors(model, errors.errors)
 
 	clearErrors: ->
-		@$('.error').removeClass('error')
-		@$('span.help').remove()
+		@$('.has-error').removeClass('has-error')
+		@$('span.help-block').remove()

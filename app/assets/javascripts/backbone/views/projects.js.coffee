@@ -25,6 +25,9 @@ class App.Views.Projects extends Backbone.View
 		@collection.add model
 
 	renderProject: (model) ->
+		if @model
+			if model.id is @model.id
+				model.set('current_view', true)
 		view = new App.Views.Project({ model: model })
 		@childViews.push(view)
 		@$('#projectList').append(view.render().el)

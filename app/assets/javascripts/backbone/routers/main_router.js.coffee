@@ -7,6 +7,7 @@ class App.Routers.MainRouter extends Backbone.Router
 		"projects": "project"
 		"projects/new": "newProject"
 		"projects/:id": "showProject"
+		"projects/edit/:id": "editProject"
 		"*path"  : "notFound"
 
 
@@ -44,15 +45,25 @@ class App.Routers.MainRouter extends Backbone.Router
 
 	loginViews: ->
 		@headerView.leave()
-		@contentView .leave()
+		@contentView.leave()
 		v = new App.Views.Login({ model: new App.Models.Login() })
 		$('#login').html(v.render().el)
+
+	editProject: (id) ->
+		@layoutViews()
+		model = @getModel id
+		@contentView.swapSide(new App.Views.Projects({ collection: new App.Collections.Projects, model: model }))
+		@contentView.swapMain(new App.Views.NewProject({ model: model }))
 
 	showProject: (id) ->
 
 		@layoutViews()
-		@contentView.swapSide(new App.Views.Projects({ collection: new App.Collections.Projects }))
-		m = new App.Models.Project({ id: parseInt(id) })
-		m.fetch
+		model = new App.Models.Project({ id: parseInt(id) })
+		@contentView.swapSide(new App.Views.Projects({ collection: new App.Collections.Projects, model: model }))
+		model.fetch
 			success: (data) ->
 				App.Vent.trigger "project:show", new App.Models.Project(data.attributes)
+
+	getModel: (id) ->
+		model = new App.Models.Project({ id: parseInt(id) })
+		model

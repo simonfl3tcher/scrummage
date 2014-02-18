@@ -30,4 +30,5 @@ class App.Views.NewProject extends Backbone.View
 			@render()
 		else
 			App.Vent.trigger "access_denied"
+			
 _.extend App.Views.NewProject.prototype, App.Mixins.Validateable

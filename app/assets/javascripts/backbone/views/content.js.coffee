@@ -5,11 +5,13 @@ class App.Views.Content extends Backbone.View
 
 	initialize: ->
 		@listenTo App.Vent, "project:create", @redirectToEdit
+		@listenTo App.Vent, "project:update", @redirectToEdit
 		@listenTo App.Vent, "project:new", @swapMainToNewProject
 		@listenTo App.Vent, "project:destroy", @projectDestroy
+		@listenTo App.Vent, "project:edit", @editProject
+		@listenTo App.Vent, "project:show", @projectShow
 		@listenTo App.Vent, "user:logged_in", @loggedIn
 		@listenTo App.Vent, "user:logged_out", @logout
-		@listenTo App.Vent, "project:show", @projectShow
 		@listenTo App.Vent, "page_not_found", @pageNotFound
 		@listenTo App.Vent, "already_logged_in", @alreadyLoggedIn
 
@@ -66,5 +68,11 @@ class App.Views.Content extends Backbone.View
 		v = new App.Views.Alert({ message: msg, type: type })
 		$('#alert').html(v.render().el)
 
+	editProject: (model) ->
+		@swapMain(new App.Views.NewProject({ model: model }))
+		Backbone.history.navigate('/projects/edit/' + model.id)
+
 	projectShow: (model) ->
 		@swapMain(new App.Views.ProjectDetails({ model: model }))
+
+		

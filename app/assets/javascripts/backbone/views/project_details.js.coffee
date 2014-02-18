@@ -8,6 +8,7 @@ class App.Views.ProjectDetails extends Backbone.View
 
 	events:
 		'click .btn.btn-danger': 'destroyProject'
+		'click .btn.btn-primary': 'editProject'
 
 	render: ->
 		@$el.html(@template(@model.toJSON()))
@@ -17,3 +18,6 @@ class App.Views.ProjectDetails extends Backbone.View
 		return unless confirm("Are you sure?")
 		@model.destroy { wait: true }
 		App.Vent.trigger "project:destroy", 'You have successfully deleted the project'
+
+	editProject: ->
+		App.Vent.trigger "project:edit", @model

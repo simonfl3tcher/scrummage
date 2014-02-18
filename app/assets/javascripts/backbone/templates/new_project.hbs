@@ -1,21 +1,51 @@
-<form id="new_project" action="/projects" method="post">
-	<fieldset>
-		<legend>Project Overview</legend>
 
-		<div class="control-group">
-			<label for="name" class="control-label">Project Name</label>
-			<div class="controls">
-				<input type="text" name="name" id="name" placeholder="Project Name" value="{{name}}" />
-			</div>
-		</div>
-		<div class="control-group">
-			<label for="description" class="control-label">Description</label>
-			<div class="controls">
-				<textarea id="description" name="description" rows="5" cols="30">{{description}}</textarea>
-			</div>
-		</div>
-		<br>
-		<button type="submit" class="btn btn-warning">Submit</button>
-	</fieldset>
+<form  id="new_project" action="/projects" method="post">
+<fieldset>
 
+<!-- Form Name -->
+<legend>Project Overview</legend>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="control-label" for="name">Project Name</label>
+  <div class="controls">
+    <input id="name" name="name" placeholder="Project Name..." class="form-control" value="{{name}}" type="text">
+    
+  </div>
+</div>
+
+<!-- Select Basic -->
+<div class="form-group">
+  <label class="control-label" for="projectType">Project Type</label>
+  <div class="controls">
+    <select id="projectType" name="projectType" class="form-control">
+     {{#select project_type}}
+	      <option value="Brochure Website">Brochure Website</option>
+	      <option value="E-Commerce Website">E-Commerce Website</option>
+	      <option value="Bespoke Application">Bespoke Application</option>
+	      <option value="Branding">Branding</option>
+	      <option value="Other">Other</option>
+	    {{/select}}
+    </select>
+  </div>
+</div>
+
+<!-- Textarea -->
+<div class="form-group">
+  <label class="control-label" for="Description">Description</label>
+  <div class="controls">              
+       
+    <textarea id="description" class="form-control" rows="3" name="Description">{{description}}</textarea>
+  </div>
+</div>
+
+<!-- Button -->
+<div class="form-group">
+  <label class="control-label" for="submit"></label>
+  <div class="controls">
+    <button id="submit" name="submit" class="btn btn-warning">Submit</button>
+  </div>
+</div>
+
+</fieldset>
 </form>

@@ -4,6 +4,8 @@ class App.Views.Project extends Backbone.View
 
 	initialize: ->
 		@listenTo @model, "destroy", @remove
+		@listenTo App.Vent, "project:create", @render
+		@listenTo App.Vent, "project:update", @render
 
 	events:
 		'click a': 'showDetails'
