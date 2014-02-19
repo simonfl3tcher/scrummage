@@ -13,3 +13,4 @@ Project.create(:name => 'Just Dental', :project_type => 'Bespoke Application', :
 
 Task.create( name: "Task 1", description: "THis is a task description", task_type: "Bug", :project_id => 1 )
 Task.create( name: "Task 2", description: "THis is a task description", task_type: "New Feature", :project_id => 1 )
+

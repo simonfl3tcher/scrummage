@@ -3,6 +3,7 @@ class App.Views.ProjectDetails extends Backbone.View
 	template: HandlebarsTemplates['backbone/templates/project_details']
 
 	initialize: ->
+		
 		@childViews = []
 		@listenTo @model, "sync", @renderDetails
 		@model.fetch() 
