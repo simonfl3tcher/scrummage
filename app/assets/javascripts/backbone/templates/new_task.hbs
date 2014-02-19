@@ -1,0 +1,42 @@
+<form id="new_Issue" action="/issues" method="post">
+	<fieldset>
+		{{#if id}}
+			<legend>Edit Task</legend>
+		{{else}}
+			<legend>New Task</legend>
+		{{/if}}
+
+		<div class="form-group">
+			<label for="name" class="control-label">Name</label>
+			<div class="controls">
+				<input type="text" name="name" id="name" class="form-control" value="{{name}}" placeholder="Task Name"  />
+			</div>
+		</div>
+
+		<!-- Select Basic -->
+		<div class="form-group">
+		  <label class="control-label" for="taskType">Task Type</label>
+		  <div class="controls">
+		    <select id="taskType" name="taskType" class="form-control">
+		     {{#select task_type}}
+			      <option value="New Feature">New Feature</option>
+			      <option value="Updates">Updates</option>
+			      <option value="Ammends">Ammends</option>
+			      <option value="Bug">Bug</option>
+			      <option value="Other">Other</option>
+			    {{/select}}
+		    </select>
+		  </div>
+		</div>
+
+		<div class="form-group">
+			<label for="description" class="control-label">Description</label>
+			<div class="controls">
+				<textarea id="description" name="description" class="form-control" rows="5" cols="30">{{description}}</textarea>
+			</div>
+		</div>
+		<br>
+		<button type="submit" class="btn btn-warning">Submit</button>
+	</fieldset>
+
+</form>

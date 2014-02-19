@@ -1,5 +1,5 @@
 {{#if current_view}}
-	<a class="list-group-item active">{{name}}</a>
+	<a class="list-group-item active">{{name}} <span class="badge">{{tasks_count}}</span></a>
 {{else}}
-	<a class="list-group-item">{{name}}</a>
+	<a class="list-group-item">{{name}} <span class="badge">{{tasks_count}}</span></a>
 {{/if}}

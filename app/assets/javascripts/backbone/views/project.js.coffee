@@ -6,6 +6,7 @@ class App.Views.Project extends Backbone.View
 		@listenTo @model, "destroy", @remove
 		@listenTo App.Vent, "project:create", @render
 		@listenTo App.Vent, "project:update", @render
+		@listenTo App.Vent, "tasks:change", @updateCounter
 
 	events:
 		'click a': 'showDetails'
@@ -25,3 +26,7 @@ class App.Views.Project extends Backbone.View
 	addActive: (e) ->
 		$('#projectList a').removeClass('active')
 		$(e.currentTarget).addClass('active')
+
+	updateCounter: (model, count) ->
+		if(model).get('project_id') is @model.id
+			@$('span.badge').text(count)

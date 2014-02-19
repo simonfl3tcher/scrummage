@@ -1,6 +1,12 @@
 class App.Models.Project extends Backbone.Model
 	urlRoot: "/projects"
 
+	initialize: ->
+		@listenTo @, "change:tasks", @convertTasks # the key line to get the tasks
+
+	convertTasks: ->
+		@tasks = new App.Collections.Tasks( @get('tasks') )
+
 	validate: (attrs, options) ->
 		errors = {}
 		unless attrs.name

@@ -8,6 +8,7 @@ class App.Routers.MainRouter extends Backbone.Router
 		"projects/new": "newProject"
 		"projects/:id": "showProject"
 		"projects/edit/:id": "editProject"
+		"projects/task/:id": "editTask"
 		"*path"  : "notFound"
 
 
@@ -55,14 +56,22 @@ class App.Routers.MainRouter extends Backbone.Router
 		@contentView.swapSide(new App.Views.Projects({ collection: new App.Collections.Projects, model: model }))
 		@contentView.swapMain(new App.Views.NewProject({ model: model }))
 
+	editTask: (id) ->
+		@layoutViews()
+		model = new App.Models.Task({ id: parseInt(id) })
+		@contentView.swapSide(new App.Views.Projects({ collection: new App.Collections.Projects, model: new App.Models.Project({id: model.get('project_id') }) }))
+		console.log model
+		@contentView.swapMain(new App.Views.NewTask({ model: model }))
+
 	showProject: (id) ->
 
 		@layoutViews()
 		model = new App.Models.Project({ id: parseInt(id) })
 		@contentView.swapSide(new App.Views.Projects({ collection: new App.Collections.Projects, model: model }))
-		model.fetch
-			success: (data) ->
-				App.Vent.trigger "project:show", new App.Models.Project(data.attributes)
+		@contentView.swapMain(new App.Views.ProjectDetails({ model: model }))
+		# model.fetch
+		# 	success: (data) ->
+		# 		App.Vent.trigger "project:show", new App.Models.Project(data.attributes)
 
 	getModel: (id) ->
 		model = new App.Models.Project({ id: parseInt(id) })

@@ -10,3 +10,6 @@ Project.create(:name => 'Elanco', :project_type => 'Bespoke Application', :descr
 Project.create(:name => 'IPIC', :project_type => 'Bespoke Application', :description => 'Nothing to say here', :user_id => 1, :created_by => 1)
 Project.create(:name => 'Stowhealth', :project_type => 'Bespoke Application', :description => 'Nothing to say here', :user_id => 1, :created_by => 1)
 Project.create(:name => 'Just Dental', :project_type => 'Bespoke Application', :description => 'Nothing to say here', :user_id => 1, :created_by => 1)
+
+Task.create( name: "Task 1", description: "THis is a task description", task_type: "Bug", :project_id => 1 )
+Task.create( name: "Task 2", description: "THis is a task description", task_type: "New Feature", :project_id => 1 )

@@ -10,6 +10,9 @@ class App.Views.Content extends Backbone.View
 		@listenTo App.Vent, "project:destroy", @projectDestroy
 		@listenTo App.Vent, "project:edit", @editProject
 		@listenTo App.Vent, "project:show", @projectShow
+		@listenTo App.Vent, "task:create", @alertSuccess
+		@listenTo App.Vent, "task:edit", @editTask
+		@listenTo App.Vent, "task:update", @redirectToProject
 		@listenTo App.Vent, "user:logged_in", @loggedIn
 		@listenTo App.Vent, "user:logged_out", @logout
 		@listenTo App.Vent, "page_not_found", @pageNotFound
@@ -55,6 +58,13 @@ class App.Views.Content extends Backbone.View
 		@alert msg, 'success'
 		@projectShow model
 
+	redirectToProject: (model, msg) ->
+
+		m = new App.Models.Project({ id: model.get('project_id')})
+		@swapMain(new App.Views.ProjectDetails({ model: m }))
+		@alertSuccess(model, msg)
+		Backbone.history.navigate("/projects/" + m.id )
+
 	swapMainToNewProject: ->
 		@swapMain(new App.Views.NewProject({ model: new App.Models.Project }))
 		Backbone.history.navigate("/projects/new")
@@ -64,13 +74,23 @@ class App.Views.Content extends Backbone.View
 		@swapMain(new App.Views.Empty)
 		Backbone.history.navigate("/projects")
 
-	alert: (msg, type) ->
+	alertSuccess: (model, msg) ->
+		@alert(msg, 'success')
+
+	alertWarning: (model, msg) ->
+		alert(msg, 'warning')
+
+	alert: (msg, type = 'success') ->
 		v = new App.Views.Alert({ message: msg, type: type })
 		$('#alert').html(v.render().el)
 
 	editProject: (model) ->
 		@swapMain(new App.Views.NewProject({ model: model }))
 		Backbone.history.navigate('/projects/edit/' + model.id)
+
+	editTask: (model) ->
+		@swapMain(new App.Views.NewTask({ model: model }))
+		Backbone.history.navigate('/projects/task/' + model.id)
 
 	projectShow: (model) ->
 		@swapMain(new App.Views.ProjectDetails({ model: model }))

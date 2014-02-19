@@ -4,11 +4,12 @@ class App.Views.ProjectDetails extends Backbone.View
 
 	initialize: ->
 		@childViews = []
-		@model.fetch() unless not @model.isNew()
+		@listenTo @model, "sync", @renderDetails
+		@model.fetch() 
 
 	events:
-		'click .btn.btn-danger': 'destroyProject'
-		'click .btn.btn-primary': 'editProject'
+		'click .btn.deleteProject': 'destroyProject'
+		'click .btn.editProject': 'editProject'
 
 	render: ->
 		@$el.html(@template(@model.toJSON()))
@@ -21,3 +22,13 @@ class App.Views.ProjectDetails extends Backbone.View
 
 	editProject: ->
 		App.Vent.trigger "project:edit", @model
+
+	renderDetails: ->
+		@$el.html(@template(@model.toJSON()))
+		v = new App.Views.Tasks({ collection: @model.tasks })
+		@childViews.push(v)
+		@$('#tasks').html(v.render().el)
+
+		v1 = new App.Views.NewTask({ model: new App.Models.Task({ project_id: @model.id }) })
+		@childViews.push(v)
+		@$("#new_task").html(v1.render().el)
