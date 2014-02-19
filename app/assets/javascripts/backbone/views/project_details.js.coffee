@@ -3,8 +3,11 @@ class App.Views.ProjectDetails extends Backbone.View
 	template: HandlebarsTemplates['backbone/templates/project_details']
 
 	initialize: ->
+		
 		@childViews = []
-		@model.fetch() unless not @model.isNew()
+		@listenTo @model, "error", @triggerAccessDenied
+		@listenTo @model, "destroy", @triggerProjectDestroy
+		@listenTo @model, "sync", @renderDetails
 
 	events:
 		'click .btn.btn-danger': 'destroyProject'
@@ -21,3 +24,9 @@ class App.Views.ProjectDetails extends Backbone.View
 
 	editProject: ->
 		App.Vent.trigger "project:edit", @model
+
+	renderDetails: ->
+		@$el.html(@template(@model.toJSON()))
+		v = new App.Views.Tasks({ collection: @model.tasks })
+		@childViews.push(v)
+		@$('#tasks').html(v.render().el)

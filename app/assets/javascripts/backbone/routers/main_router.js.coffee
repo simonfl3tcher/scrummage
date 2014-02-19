@@ -56,10 +56,10 @@ class App.Routers.MainRouter extends Backbone.Router
 		@contentView.swapMain(new App.Views.NewProject({ model: model }))
 
 	showProject: (id) ->
-
 		@layoutViews()
 		model = new App.Models.Project({ id: parseInt(id) })
 		@contentView.swapSide(new App.Views.Projects({ collection: new App.Collections.Projects, model: model }))
+		@contentView.swapMain(new App.Views.ProjectDetails({ model: model }))
 		model.fetch
 			success: (data) ->
 				App.Vent.trigger "project:show", new App.Models.Project(data.attributes)

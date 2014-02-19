@@ -7,8 +7,7 @@ class ProjectsController < ApplicationController
 	end
 
 	def show 
-		project = Project.find(params[:id])
-		respond_with(project)
+		@project = Project.includes(:tasks).find(params[:id])
 	end
 
 	def create 

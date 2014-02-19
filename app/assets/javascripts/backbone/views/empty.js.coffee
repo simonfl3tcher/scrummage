@@ -5,4 +5,3 @@ class App.Views.Empty extends Backbone.View
 	render: ->
 		@$el.html(@template())
 		@
-

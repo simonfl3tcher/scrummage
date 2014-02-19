@@ -6,6 +6,7 @@ class App.Views.Project extends Backbone.View
 		@listenTo @model, "destroy", @remove
 		@listenTo App.Vent, "project:create", @render
 		@listenTo App.Vent, "project:update", @render
+		@listenTo App.Vent, "project:new", @removeActive
 
 	events:
 		'click a': 'showDetails'
@@ -17,7 +18,7 @@ class App.Views.Project extends Backbone.View
 
 	showDetails: (e) ->
 		e.preventDefault()
-
+		
 		@addActive(e)
 		App.Vent.trigger 'project:show', @model
 		Backbone.history.navigate '/projects/' + @model.id
@@ -25,3 +26,6 @@ class App.Views.Project extends Backbone.View
 	addActive: (e) ->
 		$('#projectList a').removeClass('active')
 		$(e.currentTarget).addClass('active')
+
+	removeActive: (e) ->
+		$('#projectList a').removeClass('active')
