@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 class App.Views.Task extends Backbone.View
 
 
@@ -26,12 +25,3 @@ class App.Views.Task extends Backbone.View
 		@model.destroy { wait: true }
 		@$(e.currentTarget).closest('.list-group-item').parent().remove()
 				
-=======
-class App.Views.Task extends Backbone.View
-
-	template: HandlebarsTemplates['backbone/templates/task']
-
-	render: -> 
-		@$el.html('<h2>Tasks</h2>')
-		@
->>>>>>> fe39fe3fd7fbd9bb52b764ff284b0eeae60ee979

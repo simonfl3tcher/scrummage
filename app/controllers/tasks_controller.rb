@@ -1,7 +1,10 @@
-<<<<<<< HEAD
 class TasksController < ApplicationController
 
 	respond_to :json 
+
+	def index 
+		respond_with(Task.all)
+	end
 
 	def create 
 		@task = Task.new(task_params)
@@ -28,23 +31,4 @@ class TasksController < ApplicationController
 		params.require(:task).permit(:name, :description, :task_type, :project_id)
 	end	
 
-=======
-class TasksController < ApplicationController 
-
-	respond_to :json 
-
-	def create 
-		@task = Task.new(task_params)
-		if !@task.save
-			respond_with(@task)
-		end
-	end
-
-	private 
-
-	def task_params
-		params.require(:task).permit(:name, :description, :type_of_task, :project_id)
-	end
-
->>>>>>> fe39fe3fd7fbd9bb52b764ff284b0eeae60ee979
 end
