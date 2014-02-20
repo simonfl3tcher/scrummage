@@ -21,6 +21,7 @@ class App.Views.Task extends Backbone.View
 		App.Vent.trigger 'task:destroy', model, 'You have successfully deleted a task'
 
 	destroyTask: (e) ->
+		console.log @model.inspect
 		return unless confirm("Are you sure?")
 		@model.destroy { wait: true }
 		@$(e.currentTarget).closest('.list-group-item').parent().remove()
