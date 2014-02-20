@@ -8,6 +8,7 @@ json.tasks @project.tasks do |task|
 	json.name task.name
 	json.description task.description
 	json.task_type task.task_type
+	json.project_id task.project_id
 	json.created_at time_ago_in_words(task.created_at)
 
 end

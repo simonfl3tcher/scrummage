@@ -5,6 +5,7 @@ class App.Views.Project extends Backbone.View
 	initialize: ->
 		@listenTo @model, "destroy", @remove
 		@listenTo App.Vent, "project:create", @render
+		@listenTo App.Vent, "project:new", @renderCreate
 		@listenTo App.Vent, "project:update", @render
 		@listenTo App.Vent, "tasks:change", @updateCounter
 
@@ -13,8 +14,14 @@ class App.Views.Project extends Backbone.View
 
 
 	render: ->
+		console.log @model
 		@$el.html(@template(@model.toJSON()))
 		@
+
+	renderCreate: ->
+		console.log @model
+		$('#projectList a').removeClass('active')
+		@render
 
 	showDetails: (e) ->
 		e.preventDefault()
@@ -28,5 +35,5 @@ class App.Views.Project extends Backbone.View
 		$(e.currentTarget).addClass('active')
 
 	updateCounter: (model, count) ->
-		if(model).get('project_id') is @model.id
+		if model.get('project_id') is @model.id
 			@$('span.badge').text(count)

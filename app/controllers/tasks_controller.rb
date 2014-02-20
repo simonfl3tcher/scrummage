@@ -8,7 +8,9 @@ class TasksController < ApplicationController
 
 	def create 
 		@task = Task.new(task_params)
-		@task.save
+		if !@task.save
+			respond_with(@task)
+		end
 	end
 
 	def destroy

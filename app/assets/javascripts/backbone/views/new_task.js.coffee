@@ -10,11 +10,12 @@ class App.Views.NewTask extends Backbone.View
 		@listenTo @model, "error", @parseErrorResponse
 		@listenTo App.Vent, "task:create", @clearForm
 		@listenTo @model, "sync", @render
-		@model.fetch() 
+		# @model.fetch() 
 
 	render: ->
 		@$el.html(@template(@model.toJSON()))
 		@
+
 
 	saveTask: (e) ->
 		
@@ -27,7 +28,7 @@ class App.Views.NewTask extends Backbone.View
 		@model.set task_type: type
 		@model.set description: @$("#description").val()
 
-		@model.save {wait: true},
+		@model.save {},
 			success: (model) ->
 				if crud 
 					App.Vent.trigger 'task:create',  model, 'You have successfully created a task' 

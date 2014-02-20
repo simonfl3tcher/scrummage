@@ -8,22 +8,22 @@ class App.Views.Tasks extends Backbone.View
 		@listenTo App.Vent, 'task:destroy', @removeTask
 		@listenTo @collection, 'add', @renderTask
 		@listenTo @collection, 'add', @updateCounter
-		@listenTo @collection, 'add', @updateCounter
+		@listenTo @collection, 'remove', @updateCounter
 
 	events: 
 		'click .btn.deleteTask': 'destroyTask'
 
 
 	updateCounter: ->
-		@$('span').text(@collection.length)
+		@$('span').text('(' + @collection.length + ')')
 
 	addToCollection: (model) ->
 		@collection.add(model)
 		App.Vent.trigger "tasks:change", model, @collection.length
+		@render
 
 	removeTask: (model) ->
 		@collection.remove(model)
-		console.log model
 		App.Vent.trigger "tasks:change", model, @collection.length
 		
 	render: ->

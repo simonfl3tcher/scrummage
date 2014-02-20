@@ -56,7 +56,7 @@ class App.Views.Content extends Backbone.View
 
 	redirectToEdit: (model, msg) ->
 		@alert msg, 'success'
-		@projectShow model
+		@projectShow model # this is the issue with obj
 
 	redirectToProject: (model, msg) ->
 
@@ -90,8 +90,7 @@ class App.Views.Content extends Backbone.View
 
 	editTask: (model) ->
 		@swapMain(new App.Views.NewTask({ model: model }))
-		console.log model
-		Backbone.history.navigate('/projects/task/' + model.id)
+		Backbone.history.navigate('/projects/task/' + model.get('id'))
 
 	projectShow: (model) ->
 		@swapMain(new App.Views.ProjectDetails({ model: model }))
