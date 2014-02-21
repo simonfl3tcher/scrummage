@@ -8,9 +8,9 @@ class App.Views.NewTask extends Backbone.View
 	initialize: ->
 		@listenTo @model, "invalid", @renderErrors
 		@listenTo @model, "error", @parseErrorResponse
-		@listenTo App.Vent, "task:create", @clearForm
 		@listenTo @model, "sync", @render
-		# @model.fetch() 
+		@listenTo @model, "add", @add
+		@model.fetch() 
 
 	render: ->
 		@$el.html(@template(@model.toJSON()))
@@ -34,6 +34,9 @@ class App.Views.NewTask extends Backbone.View
 					App.Vent.trigger 'task:create',  model, 'You have successfully created a task' 
 				else 
 					App.Vent.trigger 'task:update', model, 'You have successfully updated the task'
+
+	add: ->
+		console.log "123434232"
 
 	clearForm: ->
 		@$('#name').val('')

@@ -93,6 +93,8 @@ class App.Views.Content extends Backbone.View
 		Backbone.history.navigate('/projects/task/' + model.get('id'))
 
 	projectShow: (model) ->
+		console.log model
+		# @contentView.swapSide(new App.Views.Projects({ collection: new App.Collections.Projects, model: model }))
 		@swapMain(new App.Views.ProjectDetails({ model: model }))
 
 		

@@ -15,7 +15,6 @@ class App.Views.Task extends Backbone.View
 		@
 
 	editTask: ->
-		console.log @model
 		App.Vent.trigger "task:edit", @model
 
 	remove: (model) ->

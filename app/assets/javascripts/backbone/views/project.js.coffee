@@ -14,12 +14,10 @@ class App.Views.Project extends Backbone.View
 
 
 	render: ->
-		console.log @model
 		@$el.html(@template(@model.toJSON()))
 		@
 
 	renderCreate: ->
-		console.log @model
 		$('#projectList a').removeClass('active')
 		@render
 
